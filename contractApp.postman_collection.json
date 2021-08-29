@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "86049803-b756-4af7-96a1-0766519bda00",
+		"_postman_id": "7d267413-4bd1-45d4-8efc-91d280927eeb",
 		"name": "contractApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fristName\":\"ahmed\",\r\n    \"lastName\":\"farag\",\r\n    \"email\":\"farrag740@gmail.com\",\r\n    \"password\":\"16hfDSKNF677sjbk@inDgdfg332@tf\"\r\n    \r\n    \r\n}",
+							"raw": "{\r\n    \"fristName\":\"ahmed\",\r\n    \"lastName\":\"farag\",\r\n    \"email\":\"farrag740@gmail.com\",\r\n    \"password\":\"16hfDSKNF677sjbk@inDgdfg332@tf\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,15 +23,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/register/612a6aac9e6e54eedd0b85f9",
+							"raw": "http://localhost:3000/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"register",
-								"612a6aac9e6e54eedd0b85f9"
+								"register"
 							]
 						}
 					},
@@ -51,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"email\":\"farrag74@gmail.com\",\r\n    \"password\":\"16hfDSKNF677sjbk@inDgdfg332@tf\"\r\n}\r\n",
+							"raw": "{\r\n  \"email\":\"farrag740@gmail.com\",\r\n    \"password\":\"16hfDSKNF677sjbk@inDgdfg332@tf\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -167,15 +166,26 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "contract",
+			"item": [
 				{
-					"name": "edit",
+					"name": "addContract",
 					"request": {
-						"method": "PATCH",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTJhZWE2YWMxNzNmZjAxMGZiNTNhZWEiLCJpYXQiOjE2MzAyMDI0OTh9.D70qZF41W6N4yhOxMryUvOwN2SFacreVneW3iDy4_lw",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"fristName\": \"waleed\"\r\n}",
+							"raw": "{\r\n    \"fristPartyId\":\"b\",\r\n    \"secondPartyId\":\"a\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,34 +193,47 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/edit/612ae6e49e0b023699db7b5f",
+							"raw": "http://localhost:3000/addContract",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"edit",
-								"612ae6e49e0b023699db7b5f"
+								"addContract"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:3000/delete/612ae6e49e0b023699db7b5f",
+					"name": "deleteContract",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTJhZWE2YWMxNzNmZjAxMGZiNTNhZWEiLCJpYXQiOjE2MzAyMDI0OTh9.D70qZF41W6N4yhOxMryUvOwN2SFacreVneW3iDy4_lw",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/delete/612ae6e49e0b023699db7b5f",
+							"raw": "http://localhost:3000/deleteContract/612aeb75cc3822b3338a8cf2",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"delete",
-								"612ae6e49e0b023699db7b5f"
+								"deleteContract",
+								"612aeb75cc3822b3338a8cf2"
+							],
+							"query": [
+								{
+									"key": "Auth",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},

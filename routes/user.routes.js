@@ -10,6 +10,7 @@ router.post("/logout", auth, userController.logout);
 router.get("/myprofile", auth, userController.myprofile);
 router.delete("/delete/:id", auth, userController.deleteUser);
 router.patch("/edit/:id", auth, userController.editUser);
-router.patch("/accept/:id", auth, contractController.accept);
+
+router.post("/accept/:id", auth, contractController.accept);
 
 module.exports = router;
