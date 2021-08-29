@@ -4,26 +4,21 @@ const resCreator = require("../helper/user.helper");
 var QRCode = require('qrcode')
 
 const addContract = async (req, res) => {
-<<<<<<< HEAD
     try {
-    let newInsert = new contract(req.body)
-    // qrcode
-      QRCode.toString('I am a pony!', function (err, qrurl) {
-          newInsert.qrCode =(qrurl)
-          })
+        let newInsert = new Contract(req.body)
+        // qrcode
+        QRCode.toString('I am a pony!', function (err, qrurl) {
+            newInsert.qrCode = (qrurl)
+        })
         await newInsert.save()
         res.status(200).send(resCreator(true, newInsert, "data added successfully"))
-    
-=======
-    const newInsert = new Contract(req.body);
-    try {
-        await newInsert.save();
-        res.status(200).send(resCreator(true, newInsert, "data added successfully"));
-    } catch (e) {
-        res.status(500).send(resCreator(false, e.message, "data Inserting error"));
->>>>>>> 6ff4d01fd83a4bf5a6c257f57a533197202b15ef
+
     }
-};
+    catch (e) {
+        res.status(500).send(resCreator(false, e.message, "data Inserting error"))
+    }
+
+}
 const accept = async (req, res) => {
     try {
         let contract = await Contract.findById(req.params.id);
@@ -35,15 +30,15 @@ const accept = async (req, res) => {
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "error accepting contract"));
     }
-};
+}
 const deleteContract = async (req, res) => {
     try {
         id = req.params.id;
-        const con = await contract.findOneAndDelete(id);
+        const con = await Contract.findOneAndDelete(id);
         if (!con) return res.status(404).send(resCreator(false, null, "data not found"));
         res.status(200).send(resCreator(true, con, "deleted"));
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "data Inserting error"));
     }
-};
+}
 module.exports = { addContract, accept, deleteContract };

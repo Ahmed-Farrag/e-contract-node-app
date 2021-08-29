@@ -2,7 +2,7 @@ const User = require('../models/user.model')
 const resCreator = require('../helper/user.helper')
 const activationEmail = require('../helper/email.helper')
 const auth = require('../middleware/auth')
-const multer  = require('multer')
+const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
 const register = async (req, res) => {
@@ -85,7 +85,6 @@ const editUser = async (req, res) => {
 
 
 // const upImg = async (req, res) => {
- 
 // req.user.image = req.file.path
 //     await req.user.save()
 //     res.send('done')
