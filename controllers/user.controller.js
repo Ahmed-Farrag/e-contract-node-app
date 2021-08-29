@@ -3,8 +3,6 @@ const resCreator = require('../helper/user.helper')
 const activationEmail = require('../helper/email.helper')
 const auth = require('../middleware/auth')
 
-
-
 const register = async (req, res) => {
     try {
         const userData = new User(req.body)
