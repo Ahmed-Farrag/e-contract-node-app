@@ -2,6 +2,8 @@ const User = require('../models/user.model')
 const resCreator = require('../helper/user.helper')
 const activationEmail = require('../helper/email.helper')
 const auth = require('../middleware/auth')
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const register = async (req, res) => {
     try {
@@ -79,5 +81,17 @@ const editUser = async (req, res) => {
         res.status(500).send(resCreator(false, e.message, "error in edit"));
     }
 };
+
+
+
+// const upImg = async (req, res) => {
+ 
+// req.user.image = req.file.path
+//     await req.user.save()
+//     res.send('done')
+//     //  catch (e) {
+//     //     res.status(500).send(resCreator(false, e.message, "error in uloude"));
+//     // }
+// };
 
 module.exports = { register, activate, login, logout, myprofile, deleteUser, editUser };
