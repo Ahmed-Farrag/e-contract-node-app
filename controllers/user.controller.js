@@ -1,17 +1,41 @@
-const User = require('../models/user.model')
-const resCreator = require('../helper/user.helper')
-const activationEmail = require('../helper/email.helper')
-const auth = require('../middleware/auth')
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const fs = require("fs");
+const User = require("../models/user.model");
+const resCreator = require("../helper/user.helper");
+const activationEmail = require("../helper/email.helper");
+const auth = require("../middleware/auth");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
+const generateVerificationCode = () => {
+    verificationCode = Math.floor(Math.random() * 1000000);
+    return verificationCode;
+};
+var verificationCode = generateVerificationCode();
+activityLog = null;
+readData = () => {
+    try {
+        activityLog = JSON.parse(fs.readFileSync("activityLog.json").toString());
+        if (!Array.isArray(activityLog)) throw new Error("");
+    } catch (e) {
+        activityLog = [];
+    }
+};
+writeData = () => {
+    fs.writeFileSync("activityLog.json", JSON.stringify(activityLog));
+};
+const updateActivityLog = (activity, userId, createdAt) => {
+    readData();
+    activityLog.push({ activity, userId, createdAt });
+    writeData();
+};
 const register = async (req, res) => {
     try {
         const userData = new User(req.body);
         await userData.save();
         // email
-        activationEmail(userData.email, `activation link http://localhost:3000/activate/${userData._id}`);
+        activationEmail(userData, verificationCode);
         res.status(200).send(resCreator(true, userData, "data inserted"));
+        updateActivityLog("registration", userData._id, userData.createdAt);
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "error inserting data"));
     }
@@ -22,9 +46,11 @@ const activate = async (req, res) => {
         let user = await User.findById(req.params.id);
         if (!user) res.status(404).send(resCreator(false, null, "user not found"));
         if (user.status) res.status(404).send(resCreator(false, null, "already active"));
+        if (req.body.verificationCode != verificationCode) res.send(resCreator(false, null, "invalid code"));
         user.status = true;
         await user.save();
         res.send(resCreator(true, user, "activated"));
+        updateActivityLog("activation", userData._id, userData.createdAt);
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "error inserting data"));
     }
@@ -35,6 +61,7 @@ const login = async (req, res) => {
         const userData = await User.findByCredintials(req.body.email, req.body.password);
         const token = await userData.addToken();
         res.status(200).send(resCreator(true, { userData, token }, "logged in"));
+        updateActivityLog("loged in", userData._id, userData.createdAt);
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "error inserting data"));
     }
@@ -47,6 +74,7 @@ const logout = async (req, res) => {
         });
         await req.user.save();
         res.status(200).send(resCreator(true, {}, "Logged out"));
+        await updateActivityLog("loged out", userData._id, userData.createdAt);
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "error inserting data"));
     }
@@ -62,6 +90,7 @@ const deleteUser = async (req, res) => {
         const data = await User.findByIdAndDelete(id);
         if (!data) return res.status(400).send(resCreator(false, null, "user not found"));
         res.status(200).send(resCreator(true, data, "user deleted"));
+        updateActivityLog("delete account", userData._id, userData.createdAt);
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "error in delete"));
     }
@@ -77,12 +106,11 @@ const editUser = async (req, res) => {
         const user = await User.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!user) return res.status(404).send(resCreator(false, null, "user not found"));
         res.status(200).send(resCreator(true, user, "user updated"));
+        updateActivityLog("update", userData._id, userData.createdAt);
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "error in edit"));
     }
 };
-
-
 
 // const upImg = async (req, res) => {
 // req.user.image = req.file.path

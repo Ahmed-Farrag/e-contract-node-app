@@ -1,28 +1,26 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require("nodemailer");
 
 const stmpConfig = {
-    service: 'gmail',
+    service: "gmail",
     auth: {
         user: "abctech22@gmail.com",
-        pass: "/[A-Z]{8}^/"
-    }
-}
+        pass: "/[A-Z]{8}^/",
+    },
+};
 
-const activationEmail = (recEmail, textEmail) => {
+const activationEmail = (userData, verificationCode) => {
     try {
-        const transporter = nodemailer.createTransport(stmpConfig)
+        const transporter = nodemailer.createTransport(stmpConfig);
         let mailOPtions = {
             from: "abctech22@gmail.com",
-            to: recEmail,
+            to: userData.email,
             subject: "Welcome in E-Contract",
-            text: textEmail
-        }
-        transporter.sendMail(mailOPtions)
+            text: `Hello <strong>${userData.fristName}, Thanks so much for joining E-contract we are glad that you want to join us! Please use the verification code to verify your account, your verification code is ${verificationCode} go to "http://localhost:3000/activate/${userData._id} to active Your Account`,
+        };
+        transporter.sendMail(mailOPtions);
+    } catch (e) {
+        console.log(e);
     }
-    catch (e) {
-        console.log(e)
-    }
-}
+};
 
-
-module.exports = activationEmail
+module.exports = activationEmail;
