@@ -1,9 +1,6 @@
 const User = require('../models/user.model')
 const resCreator = require('../helper/user.helper')
 const activationEmail = require('../helper/email.helper')
-const auth = require('../middleware/auth')
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
 
 const register = async (req, res) => {
     try {
@@ -52,8 +49,23 @@ const logout = async (req, res) => {
     }
 };
 
+const logoutAll = async (req, res) => {
+    try {
+        req.user.tokens = []
+        await req.user.save();
+        res.status(200).send(resCreator(true, {}, "Logged out All"));
+    } catch (e) {
+        res.status(500).send(resCreator(false, e.message, "error inserting data"));
+    }
+}
+
 const myprofile = async (req, res) => {
-    res.status(200).send(resCreator(true, req.user, "data featched"));
+    try {
+        res.status(200).send(resCreator(true, req.user, "data featched"));
+    }
+    catch (e) {
+        res.status(500).send(resCreator(false, e.message, "error in myprofile"));
+    }
 };
 
 const deleteUser = async (req, res) => {
@@ -80,17 +92,22 @@ const editUser = async (req, res) => {
     } catch (e) {
         res.status(500).send(resCreator(false, e.message, "error in edit"));
     }
-};
+}
 
+const showAllUsers = async (req, res) => {
+    try {
+        const data = await User.find()
+        res.status(200).send(resCreator(true, data, "loding data"));
+    }
+    catch (e) {
+        res.status(500).send(resCreator(false, e.message, "error in allusers"))
+    }
+}
 
+const upImg = async (req, res) => {
+    req.user.img = req.file.path
+    await req.user.save()
+    res.send('done')
+}
 
-// const upImg = async (req, res) => {
-// req.user.image = req.file.path
-//     await req.user.save()
-//     res.send('done')
-//     //  catch (e) {
-//     //     res.status(500).send(resCreator(false, e.message, "error in uloude"));
-//     // }
-// };
-
-module.exports = { register, activate, login, logout, myprofile, deleteUser, editUser };
+module.exports = { register, activate, login, logout, logoutAll, myprofile, deleteUser, editUser, showAllUsers, upImg }

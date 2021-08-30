@@ -1,16 +1,18 @@
-const router = require("express").Router();
-const userController = require("../controllers/user.controller");
+const router = require("express").Router()
+const userController = require("../controllers/user.controller")
 const auth = require("../middleware/auth")
+const upload = require('../middleware/uploud-file')
 
-// const upload = multer({ dest: 'uploads/' })
 
 router.post("/register", userController.register)
 router.get("/activate/:id", userController.activate)
 router.post("/login", userController.login)
 router.post("/logout", auth, userController.logout)
+router.post("/logoutAll", auth, userController.logoutAll)
 router.get("/myprofile", auth, userController.myprofile)
 router.delete("/delete/:id", auth, userController.deleteUser)
 router.patch("/edit/:id", auth, userController.editUser)
-// router.post("/upImg",upload.single('img'), userController.upImg)
+router.get("/showAllUsers", auth, userController.showAllUsers)
+router.post("/upImg", auth, upload.single('profile'), userController.upImg)
 
-module.exports = router;
+module.exports = router

@@ -43,8 +43,9 @@ const userSchema = new mongoose.Schema({
             if (!validator.isMobilePhone(value, ['ar-EG'])) throw new Error('invalid phone')
         }
     },
-    idImage: {
+    img: {
         type: String,
+        // required: true,
         default: ""
     },
     status: {
@@ -55,6 +56,17 @@ const userSchema = new mongoose.Schema({
         { token: { type: String } }
     ]
 }, { timestamps: true })
+
+
+//handle response
+userSchema.methods.toJSON = function () {
+    const user = this.toObject()
+    let deleted = ['password', 'idImage', 'tokens', '__v']
+    deleted.forEach(item => {
+        delete user[item]
+    })
+    return user
+}
 
 // bcrypt
 userSchema.pre('save', async function (next) {

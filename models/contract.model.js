@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
+// const validator = require("validator");
+// const bcrypt = require("bcryptjs");
 
 const contractSchema = new mongoose.Schema(
     {
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            requird: true
+        },
         fristPartyId: {
             type: String,
             trim: true,
@@ -25,7 +30,7 @@ const contractSchema = new mongoose.Schema(
                     termDetails: {
                         type: String,
                         trim: true,
-                        min: 20,
+                        max: 100,
                     }
                 }
             }
@@ -37,10 +42,13 @@ const contractSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        archive: {
+            type: Boolean,
+        }
     },
     { timestamps: true },
 );
 
 const Contract = mongoose.model("Contract", contractSchema);
 
-module.exports = Contract;
+module.exports = Contract
