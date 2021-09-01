@@ -1,32 +1,34 @@
 const mongoose = require("mongoose");
 const termsOfContractSchema = new mongoose.Schema(
     {
-        userId: {
+        contractId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Contract",
             requird: true
         },
-        termsOfContract: [
-            {
-                termOfContract: {
-                    termType: {
-                        type: String,
-                        trim: true,
-                        min: 5,
-                    },
-                    termDetails: {
-                        type: String,
-                        trim: true,
-                        max: 100,
-                    }
-                }
+        term: {
+            type: String,
+            requird: true,
+            trim: true,
+        },
+        termContent: {
+            type: String,
+            requird: true,
+            trim: true,
+        },
+        requestedUpdates: {
+            term: {
+                type: String,
+                trim: true,
+            },
+            termContent: {
+                type: String,
+                trim: true,
             }
-        ],
-
+        },
     },
     { timestamps: true },
 )
 
-const termsOfContract = mongoose.model("termsOfContract", termsOfContractSchema)
-
-module.exports = termsOfContract
+const TermsOfContract = mongoose.model("termsOfContract", termsOfContractSchema)
+module.exports = TermsOfContract

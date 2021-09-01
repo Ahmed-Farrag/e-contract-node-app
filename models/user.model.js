@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
             required: true,
             unique: true,
             validate(value) {
-            if (!validator.isEmail(value)) throw new Error('invalid email format')
+                if (!validator.isEmail(value)) throw new Error('invalid email format')
             }
         },
         password: {
@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
             validate(value) {
             if (value.toLowerCase().includes('pass') || value.toLowerCase().includes('password') ||
                 value.toLowerCase().includes('123') || value.toLowerCase().includes(this.name))
-                throw new Error('invalid password')
+                    throw new Error('invalid password')
             }
         },
         phone: {
@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
             trim: true,
             required: true,
             validate(value) {
-            if (!validator.isMobilePhone(value, ['ar-EG'])) throw new Error('invalid phone')
+                if (!validator.isMobilePhone(value, ['ar-EG'])) throw new Error('invalid phone')
             }
         },
         img: {
@@ -57,7 +57,8 @@ const userSchema = new mongoose.Schema({
     ],
         vCode: {
             type: Number,
-        }
+        },
+        contracts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contract', requird: true }],
     },
     { timestamps: true }
 )

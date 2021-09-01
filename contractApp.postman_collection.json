@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7d267413-4bd1-45d4-8efc-91d280927eeb",
+		"_postman_id": "dee83c17-d642-45b1-8dcf-d918f09e7b8a",
 		"name": "contractApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fristName\":\"ahmed\",\r\n    \"lastName\":\"farag\",\r\n    \"email\":\"farrag740@gmail.com\",\r\n    \"password\":\"16hfDSKNF677sjbk@inDgdfg332@tf\"\r\n}",
+							"raw": "{\r\n    \"fristName\":\"waleed\",\r\n    \"lastName\":\"negm\",\r\n    \"email\":\"wm.negm@gmail.com\",\r\n    \"password\":\"Qwerty 011\",\r\n    \"phone\":\"01092408245\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -50,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\":\"farrag740@gmail.com\",\r\n    \"password\":\"16hfDSKNF677sjbk@inDgdfg332@tf\"\r\n}\r\n",
+							"raw": "{\r\n    \"email\":\"wm.negm@gmail.com\",\r\n    \"password\":\"Qwerty 011\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,7 +78,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTJhNjdiMzYxZjJlNWM2MDJkMzYxYzMiLCJpYXQiOjE2MzAxNjkwMTZ9.OYwvPKI0CB8dbXHWLXT1EJzslmQhV1hmrcNPBj_YFtM",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTJmNzM1NTI4NDgwODc2YTFjYjE4NmYiLCJpYXQiOjE2MzA1MDE4NDB9.PFXllALIgsz97HME3O1LxG8nVXU6MT-_2C5T493DknM",
 								"type": "text"
 							}
 						],
@@ -110,19 +110,20 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTJhNjZlNTYxZjJlNWM2MDJkMzYxYjkiLCJpYXQiOjE2MzAxNjg4MTB9.n_tm3FFtSm3fsItmcVgGeH_gx64jHqWeCixG7X7JE30",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTJmNzM1NTI4NDgwODc2YTFjYjE4NmYiLCJpYXQiOjE2MzA1MDAyODR9._hvxAVggzmHRT5bJaQngfn19ETeU0V6z3OfDBNXMi_Q",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/myprofile",
+							"raw": "http://localhost:3000/myprofile/612f735528480876a1cb186f",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"myprofile"
+								"myprofile",
+								"612f735528480876a1cb186f"
 							],
 							"query": [
 								{
@@ -136,16 +137,19 @@
 					"response": []
 				},
 				{
-					"name": "activate",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "edit",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTJmNzM1NTI4NDgwODc2YTFjYjE4NmYiLCJpYXQiOjE2MzA1MDAyODR9._hvxAVggzmHRT5bJaQngfn19ETeU0V6z3OfDBNXMi_Q",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"phone\":\"01092408245\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,7 +157,63 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/activate/612a6aac9e6e54eedd0b85f9",
+							"raw": "http://localhost:3000/edit/612f735528480876a1cb186f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"edit",
+								"612f735528480876a1cb186f"
+							],
+							"query": [
+								{
+									"key": "Auth",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deactivate",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/deactivate/612f735528480876a1cb186f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"deactivate",
+								"612f735528480876a1cb186f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activate",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vCode\":394204\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/activate/612f735528480876a1cb186f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -161,7 +221,53 @@
 							"port": "3000",
 							"path": [
 								"activate",
-								"612a6aac9e6e54eedd0b85f9"
+								"612f735528480876a1cb186f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTJmNTQ0OTRjMDJkNzNiNzdlYTAzZGQiLCJpYXQiOjE2MzA0OTIwNDV9.2wTlzjUbQ5sZ_Bv2BELhu7X8Fn5rqxgwwr_eLybdsL4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/delete/612f54494c02d73b77ea03dd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"delete",
+								"612f54494c02d73b77ea03dd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendActivationCode",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/sendVerificationCode/612f735528480876a1cb186f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sendVerificationCode",
+								"612f735528480876a1cb186f"
 							]
 						}
 					},
@@ -234,6 +340,26 @@
 									"value": null,
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/accept/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/accept/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"accept",
+								""
 							]
 						}
 					},

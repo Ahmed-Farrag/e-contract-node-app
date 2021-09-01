@@ -1,40 +1,18 @@
 const mongoose = require("mongoose");
-// const validator = require("validator");
-// const bcrypt = require("bcryptjs");
 
 const contractSchema = new mongoose.Schema(
     {
-        userId: {
+        fristPartyId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            requird: true
-        },
-        fristPartyId: {
-            type: String,
-            trim: true,
-            required: true,
+            requird: true,
         },
         secondPartyId: {
-            type: String,
-            trim: true,
-            required: true,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            requird: true,
         },
-        termsOfContract: [
-            {
-                termOfContract: {
-                    termType: {
-                        type: String,
-                        trim: true,
-                        min: 5,
-                    },
-                    termDetails: {
-                        type: String,
-                        trim: true,
-                        max: 100,
-                    }
-                }
-            }
-        ],
+        termsOfContract: [{ type: mongoose.Schema.Types.ObjectId, ref: "TermsOfContract", requird: true }],
         qrCode: {
             type: String,
         },
