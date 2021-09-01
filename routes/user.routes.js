@@ -5,7 +5,9 @@ const upload = require('../middleware/uploud-file')
 
 
 router.post("/register", userController.register)
-router.get("/activate/:id", userController.activate)
+router.patch("/activate/:id", userController.activate)
+router.patch("/deactivate/:id", userController.deactivate)
+router.patch("/sendVerificationCode/:id", userController.sendVerificationCode)
 router.post("/login", userController.login)
 router.post("/logout", auth, userController.logout)
 router.post("/logoutAll", auth, userController.logoutAll)

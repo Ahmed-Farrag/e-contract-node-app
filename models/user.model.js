@@ -4,59 +4,63 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema({
-    fristName: {
-        type: String,
-        trim: true,
-        required: true
-    },
-    lastName: {
-        type: String,
-        trim: true,
-        required: true
-    },
-    email: {
-        type: String,
-        lowercase: true,
-        trim: true,
-        required: true,
-        unique: true,
-        validate(value) {
+        fristName: {
+            type: String,
+            trim: true,
+            required: true
+        },
+        lastName: {
+            type: String,
+            trim: true,
+            required: true
+        },
+        email: {
+            type: String,
+            lowercase: true,
+            trim: true,
+            required: true,
+            unique: true,
+            validate(value) {
             if (!validator.isEmail(value)) throw new Error('invalid email format')
-        }
-    },
-    password: {
-        type: String,
-        trim: true,
-        required: true,
-        min: 8,
-        match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/,
-        validate(value) {
+            }
+        },
+        password: {
+            type: String,
+            trim: true,
+            required: true,
+            min: 8,
+            match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/,
+            validate(value) {
             if (value.toLowerCase().includes('pass') || value.toLowerCase().includes('password') ||
                 value.toLowerCase().includes('123') || value.toLowerCase().includes(this.name))
                 throw new Error('invalid password')
-        }
-    },
-    phone: {
-        type: String,
-        trim: true,
-        validate(value) {
+            }
+        },
+        phone: {
+            type: String,
+            trim: true,
+            required: true,
+            validate(value) {
             if (!validator.isMobilePhone(value, ['ar-EG'])) throw new Error('invalid phone')
-        }
-    },
-    img: {
-        type: String,
-        // required: true,
-        default: ""
-    },
-    status: {
-        type: Boolean,
-        default: false
-    },
+            }
+        },
+        img: {
+            type: String,
+            default: ""
+        },
+        status: {
+            type: Boolean,
+            default: false
+        },
     tokens: [
         { token: { type: String } }
-    ]
-}, { timestamps: true })
-
+    ],
+        vCode: {
+            type: Number,
+        }
+    },
+    { timestamps: true }
+)
 
 //handle response
 userSchema.methods.toJSON = function () {

@@ -8,14 +8,14 @@ const stmpConfig = {
     },
 };
 
-const activationEmail = (userData, verificationCode) => {
+const activationEmail = (userId, email, fristName, verificationCode) => {
     try {
         const transporter = nodemailer.createTransport(stmpConfig);
         let mailOPtions = {
             from: "abctech22@gmail.com",
-            to: userData.email,
+            to: email,
             subject: "Welcome in E-Contract",
-            text: `Hello <strong>${userData.fristName}, Thanks so much for joining E-contract we are glad that you want to join us! Please use the verification code to verify your account, your verification code is ${verificationCode} go to "http://localhost:3000/activate/${userData._id} to active Your Account`,
+            text: `Hello ${fristName}, Thanks so much for joining E-contract we are glad that you want to join us! Please use the verification code to verify your account, your verification code is ${verificationCode} go to "http://localhost:3000/activate/${userId} to active Your Account`,
         };
         transporter.sendMail(mailOPtions);
     } catch (e) {
