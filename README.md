@@ -5,14 +5,14 @@ registration and CRUD operations to User and contract
 
 # User API ==>
 
-# register 
-# activate account
-# deactivate account
-send Verification Code
-login
-logout
-logoutAll
-my profile
+- register 
+- activate account
+- deactivate account
+- send Verification Code
+- login
+- logout
+- logoutAll
+- my profile
 delete user
 edit user
 showAllUsers
