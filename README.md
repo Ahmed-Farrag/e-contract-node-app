@@ -5,9 +5,9 @@ registration and CRUD operations to User and contract
 
 # User API ==>
 
-register 
-activate account
-deactivate account
+# register 
+# activate account
+# deactivate account
 send Verification Code
 login
 logout
