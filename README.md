@@ -1,8 +1,9 @@
 # E-ContractApp
 registration and CRUD operations to User and contract
-#####
 
-# user api =>
+##############################
+
+# User API ==>
 
 register 
 activate account
@@ -16,3 +17,19 @@ delete user
 edit user
 showAllUsers
 uploud image
+
+##############################
+
+# Contract API ==>
+check Contract
+single Contract
+all Contracts
+contract Requests
+add Contract
+add Contract Terms
+edit Contract
+request Contract Updates
+accept Contract Updates
+delete Contract
+accept Contract
+
